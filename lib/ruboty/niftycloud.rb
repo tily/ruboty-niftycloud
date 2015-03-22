@@ -1,7 +1,6 @@
+require "ruboty"
+require "ruboty/niftycloud/actions/base"
+require "ruboty/niftycloud/actions/account_list"
+require "ruboty/niftycloud/actions/account_use"
 require "ruboty/niftycloud/version"
-
-module Ruboty
-  module Niftycloud
-    # Your code goes here...
-  end
-end
+require "ruboty/handlers/niftycloud"
