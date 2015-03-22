@@ -38,7 +38,7 @@ module Ruboty
           if region
             message.robot.brain.data[NAMESPACE]["current_region"] = region
           else
-            message.robot.brain.data[NAMESPACE]["current_region"]
+            message.robot.brain.data[NAMESPACE]["current_region"] || 'east-1'
           end 
         end
 
