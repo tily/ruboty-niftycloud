@@ -44,7 +44,7 @@ module Ruboty
 
         def computing
           AceClient::Niftycloud::Computing.build_client(
-            current_account.merge(endpoint: 'cp.cloud.nifty.com', path: '/api')
+            current_account.merge(endpoint: "#{current_region}.cp.cloud.nifty.com", path: '/api')
           )
         end
       end
