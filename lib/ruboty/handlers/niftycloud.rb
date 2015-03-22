@@ -14,12 +14,22 @@ module Ruboty
         description: 'use niftycloud account',
       )
 
+      on(
+        /niftycloud computing instance list/,
+        name: 'computing_instance_list',
+        description: 'list computing instances',
+      )
+
       def account_list(message)
         Ruboty::Niftycloud::Actions::AccountList.new(message).call
       end
 
       def account_use(message)
         Ruboty::Niftycloud::Actions::AccountUse.new(message).call
+      end
+
+      def computing_instance_list(message)
+        Ruboty::Niftycloud::Actions::ComputingInstanceList.new(message).call
       end
     end
   end

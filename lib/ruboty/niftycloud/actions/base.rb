@@ -1,3 +1,5 @@
+require 'ace-client/niftycloud/computing'
+
 module Ruboty
   module Niftycloud
     module Actions
@@ -29,6 +31,12 @@ module Ruboty
             name = message.robot.brain.data[NAMESPACE]["current_account"] || ENV["NIFTYCLOUD_DEFAULT_ACCOUNT"]
             accounts.find {|account| account[:name] == name }
           end
+        end
+
+        def computing
+          AceClient::Niftycloud::Computing.build_client(
+            current_account.merge(endpoint: 'cp.cloud.nifty.com', path: '/api')
+          )
         end
       end
     end
