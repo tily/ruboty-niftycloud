@@ -1,24 +1,30 @@
 # Ruboty::Niftycloud
 
-TODO: Write a gem description
+Manage NIFTYCloud via Ruboty
 
-## Installation
+## Install
 
-Add this line to your application's Gemfile:
-
-    gem 'ruboty-niftycloud'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install ruboty-niftycloud
+```
+# Gemfile
+gem "ruboty-niftycloud"
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+@ruboty niftycloud account list                       - list accounts
+@ruboty niftycloud account switch <account or number> - switch to account
+```
+
+## ENV
+
+```
+NIFTYCLOUD_ACCOUNTS                           - accounts to use (separated by comma)
+NIFTYCLOUD_DEFAULT_ACCOUNT                    - default account
+NIFTYCLOUD_ACCOUNT_ABC12345_DESCRIPTION       - account's description
+NIFTYCLOUD_ACCOUNT_ABC00001_ACCESS_KEY_ID     - account's access key id
+NIFTYCLOUD_ACCOUNT_ABC00001_SECRET_ACCESS_KEY - account's secret access key
+```
 
 ## Contributing
 
