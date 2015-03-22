@@ -21,6 +21,12 @@ module Ruboty
       )
 
       on(
+        /niftycloud computing instance show (?<instance_id>.+)/,
+        name: 'computing_instance_show',
+        description: 'show computing instance',
+      )
+
+      on(
         /niftycloud computing region list/,
         name: 'computing_region_list',
         description: 'list computing regions',
@@ -42,6 +48,10 @@ module Ruboty
 
       def computing_instance_list(message)
         Ruboty::Niftycloud::Actions::ComputingInstanceList.new(message).call
+      end
+
+      def computing_instance_show(message)
+        Ruboty::Niftycloud::Actions::ComputingInstanceShow.new(message).call
       end
 
       def computing_region_list(message)
