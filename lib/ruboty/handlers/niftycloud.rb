@@ -51,6 +51,18 @@ module Ruboty
       )
 
       on(
+        /niftycloud computing load_balancer list/,
+        name: 'computing_load_balancer_list',
+        description: 'list computing load balancers',
+      )
+
+      on(
+        /niftycloud computing load_balancer show (?<load_balancer_name>.+)/,
+        name: 'computing_load_balancer_show',
+        description: 'show computing load balancer',
+      )
+
+      on(
         /niftycloud computing region list/,
         name: 'computing_region_list',
         description: 'list computing regions',
@@ -92,6 +104,14 @@ module Ruboty
 
       def computing_volume_show(message)
         Ruboty::Niftycloud::Actions::ComputingVolumeShow.new(message).call
+      end
+
+      def computing_load_balancer_list(message)
+        Ruboty::Niftycloud::Actions::ComputingLoadBalancerList.new(message).call
+      end
+
+      def computing_load_balancer_show(message)
+        Ruboty::Niftycloud::Actions::ComputingLoadBalancerShow.new(message).call
       end
 
       def computing_region_list(message)
