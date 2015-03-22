@@ -63,6 +63,54 @@ module Ruboty
       )
 
       on(
+        /niftycloud computing address list/,
+        name: 'computing_address_list',
+        description: 'list computing addresss',
+      )
+
+      on(
+        /niftycloud computing availability_zone list/,
+        name: 'computing_availability_zone_list',
+        description: 'list computing availability zones',
+      )
+
+      on(
+        /niftycloud computing image list/,
+        name: 'computing_image_list',
+        description: 'list computing images',
+      )
+
+      on(
+        /niftycloud computing image show (?<image_id>.+)/,
+        name: 'computing_image_show',
+        description: 'show computing image',
+      )
+
+      on(
+        /niftycloud computing key_pair list/,
+        name: 'computing_key_pair_list',
+        description: 'list computing key pairs',
+      )
+
+      on(
+        /niftycloud computing key_pair show (?<key_pair_id>.+)/,
+        name: 'computing_key_pair_show',
+        description: 'show computing key pair',
+      )
+
+      on(
+        /niftycloud computing ssl_certificate list/,
+        name: 'computing_ssl_certificate_list',
+        description: 'list computing ssl certificates',
+      )
+
+      on(
+        /niftycloud computing ssl_certificate show (?<fqdn_id>.+)/,
+        name: 'computing_ssl_certificate_show',
+        description: 'show computing ssl certificate',
+      )
+
+      on(
         /niftycloud computing region list/,
         name: 'computing_region_list',
         description: 'list computing regions',
@@ -112,6 +160,38 @@ module Ruboty
 
       def computing_load_balancer_show(message)
         Ruboty::Niftycloud::Actions::ComputingLoadBalancerShow.new(message).call
+      end
+
+      def computing_address_list(message)
+        Ruboty::Niftycloud::Actions::ComputingAddressList.new(message).call
+      end
+
+      def computing_availability_zone_list(message)
+        Ruboty::Niftycloud::Actions::ComputingAvailabilityZoneList.new(message).call
+      end
+
+      def computing_image_list(message)
+        Ruboty::Niftycloud::Actions::ComputingImageList.new(message).call
+      end
+
+      def computing_image_show(message)
+        Ruboty::Niftycloud::Actions::ComputingImageShow.new(message).call
+      end
+
+      def computing_key_pair_list(message)
+        Ruboty::Niftycloud::Actions::ComputingKeyPairList.new(message).call
+      end
+
+      def computing_key_pair_show(message)
+        Ruboty::Niftycloud::Actions::ComputingKeyPairShow.new(message).call
+      end
+
+      def computing_ssl_certificate_list(message)
+        Ruboty::Niftycloud::Actions::ComputingSslCertificateList.new(message).call
+      end
+
+      def computing_ssl_certificate_show(message)
+        Ruboty::Niftycloud::Actions::ComputingSslCertificateShow.new(message).call
       end
 
       def computing_region_list(message)
