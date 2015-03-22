@@ -35,7 +35,19 @@ module Ruboty
       on(
         /niftycloud computing security_group show (?<group_name>.+)/,
         name: 'computing_security_group_show',
-        description: 'show computing security groups',
+        description: 'show computing security group',
+      )
+
+      on(
+        /niftycloud computing volume list/,
+        name: 'computing_volume_list',
+        description: 'list computing volumes',
+      )
+
+      on(
+        /niftycloud computing volume show (?<volume_id>.+)/,
+        name: 'computing_volume_show',
+        description: 'show computing volume',
       )
 
       on(
@@ -72,6 +84,14 @@ module Ruboty
 
       def computing_security_group_show(message)
         Ruboty::Niftycloud::Actions::ComputingSecurityGroupShow.new(message).call
+      end
+
+      def computing_volume_list(message)
+        Ruboty::Niftycloud::Actions::ComputingVolumeList.new(message).call
+      end
+
+      def computing_volume_show(message)
+        Ruboty::Niftycloud::Actions::ComputingVolumeShow.new(message).call
       end
 
       def computing_region_list(message)

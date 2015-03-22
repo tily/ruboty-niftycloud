@@ -8,6 +8,8 @@ require "ruboty/niftycloud/actions/computing_instance_list"
 require "ruboty/niftycloud/actions/computing_instance_show"
 require "ruboty/niftycloud/actions/computing_security_group_list"
 require "ruboty/niftycloud/actions/computing_security_group_show"
+require "ruboty/niftycloud/actions/computing_volume_list"
+require "ruboty/niftycloud/actions/computing_volume_show"
 require "ruboty/niftycloud/version"
 require "ruboty/handlers/niftycloud"
 
