@@ -22,4 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_dependency "ruboty"
+  spec.add_dependency "ace-client"
+  spec.add_dependency "ace-client-ext"
 end
