@@ -12,8 +12,9 @@ gem "ruboty-niftycloud"
 ## Usage
 
 ```
-@ruboty niftycloud account list                       - list accounts
+@ruboty niftycloud account list                    - list accounts
 @ruboty niftycloud account use <account or number> - switch to account
+@ruboty niftycloud computing instance list         - list computing instances
 ```
 
 ## ENV
