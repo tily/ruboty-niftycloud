@@ -19,6 +19,8 @@ require "ruboty/niftycloud/actions/computing_availability_zone_list"
 require "ruboty/niftycloud/actions/computing_ssl_certificate_list"
 require "ruboty/niftycloud/actions/computing_ssl_certificate_show"
 require "ruboty/niftycloud/actions/computing_address_list"
+require "ruboty/niftycloud/actions/rdb_db_instance_list"
+require "ruboty/niftycloud/actions/rdb_db_instance_show"
 require "ruboty/niftycloud/version"
 require "ruboty/handlers/niftycloud"
 

@@ -1,4 +1,5 @@
 require 'ace-client/niftycloud/computing'
+require 'ace-client/niftycloud/rdb'
 
 module Ruboty
   module Niftycloud
@@ -45,6 +46,12 @@ module Ruboty
         def computing
           AceClient::Niftycloud::Computing.build_client(
             current_account.merge(endpoint: "#{current_region}.cp.cloud.nifty.com", path: '/api')
+          )
+        end
+
+        def rdb
+          AceClient::Niftycloud::Rdb.build_client(
+            current_account.merge(endpoint: "rdb.jp-#{current_region}.api.cloud.nifty.com")
           )
         end
       end

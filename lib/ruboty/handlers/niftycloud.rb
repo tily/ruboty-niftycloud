@@ -111,6 +111,18 @@ module Ruboty
       )
 
       on(
+        /niftycloud rdb db_instance list/,
+        name: 'rdb_db_instance_list',
+        description: 'list rdb db instances',
+      )
+
+      on(
+        /niftycloud rdb db_instance show (?<db_instance_id>.+)/,
+        name: 'rdb_db_instance_show',
+        description: 'show rdb db instance',
+      )
+
+      on(
         /niftycloud computing region list/,
         name: 'computing_region_list',
         description: 'list computing regions',
@@ -192,6 +204,14 @@ module Ruboty
 
       def computing_ssl_certificate_show(message)
         Ruboty::Niftycloud::Actions::ComputingSslCertificateShow.new(message).call
+      end
+
+      def rdb_db_instance_list(message)
+        Ruboty::Niftycloud::Actions::RdbDbInstanceList.new(message).call
+      end
+
+      def rdb_db_instance_show(message)
+        Ruboty::Niftycloud::Actions::RdbDbInstanceShow.new(message).call
       end
 
       def computing_region_list(message)
