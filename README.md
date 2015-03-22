@@ -13,7 +13,7 @@ gem "ruboty-niftycloud"
 
 ```
 @ruboty niftycloud account list                       - list accounts
-@ruboty niftycloud account switch <account or number> - switch to account
+@ruboty niftycloud account use <account or number> - switch to account
 ```
 
 ## ENV
