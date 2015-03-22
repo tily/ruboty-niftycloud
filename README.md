@@ -13,7 +13,7 @@ gem "ruboty-niftycloud"
 
 ```
 @ruboty niftycloud account list                    - list accounts
-@ruboty niftycloud account use <account or number> - switch to account
+@ruboty niftycloud account use <account or number> - use account
 @ruboty niftycloud computing region list           - list computing regions
 @ruboty niftycloud computing region use            - use computing region
 @ruboty niftycloud computing instance list         - list computing instances
