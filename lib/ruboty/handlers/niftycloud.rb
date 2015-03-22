@@ -1,4 +1,3 @@
-p 'handl'
 module Ruboty
   module Handlers
     class Niftycloud < Base
