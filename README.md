@@ -25,8 +25,8 @@ gem "ruboty-niftycloud"
 NIFTYCLOUD_ACCOUNTS                           - accounts to use (separated by comma)
 NIFTYCLOUD_DEFAULT_ACCOUNT                    - default account
 NIFTYCLOUD_ACCOUNT_ABC12345_DESCRIPTION       - account's description
-NIFTYCLOUD_ACCOUNT_ABC00001_ACCESS_KEY_ID     - account's access key id
-NIFTYCLOUD_ACCOUNT_ABC00001_SECRET_ACCESS_KEY - account's secret access key
+NIFTYCLOUD_ACCOUNT_ABC12345_ACCESS_KEY_ID     - account's access key id
+NIFTYCLOUD_ACCOUNT_ABC12345_SECRET_ACCESS_KEY - account's secret access key
 ```
 
 ## Contributing
