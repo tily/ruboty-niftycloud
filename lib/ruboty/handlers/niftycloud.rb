@@ -26,6 +26,12 @@ module Ruboty
         description: 'list computing regions',
       )
 
+      on(
+        /niftycloud computing region use (?<region>.+)/,
+        name: 'computing_region_use',
+        description: 'use computing region',
+      )
+
       def account_list(message)
         Ruboty::Niftycloud::Actions::AccountList.new(message).call
       end
@@ -40,6 +46,10 @@ module Ruboty
 
       def computing_region_list(message)
         Ruboty::Niftycloud::Actions::ComputingRegionList.new(message).call
+      end
+
+      def computing_region_use(message)
+        Ruboty::Niftycloud::Actions::ComputingRegionUse.new(message).call
       end
     end
   end

@@ -33,6 +33,15 @@ module Ruboty
           end
         end
 
+        def current_region(region=nil)
+          message.robot.brain.data[NAMESPACE] ||= {}
+          if region
+            message.robot.brain.data[NAMESPACE]["current_region"] = region
+          else
+            message.robot.brain.data[NAMESPACE]["current_region"]
+          end 
+        end
+
         def computing
           AceClient::Niftycloud::Computing.build_client(
             current_account.merge(endpoint: 'cp.cloud.nifty.com', path: '/api')
