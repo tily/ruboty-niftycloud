@@ -2,134 +2,153 @@ p 'handl'
 module Ruboty
   module Handlers
     class Niftycloud < Base
+      NIFTYCLOUD = "(?:niftycloud|nc)"
+
+      ACCOUNT = "(?:account|a)"
+      COMPUTING = "(?:computing|c)"
+      RDB = "(?:rdb|r)"
+
+      INSTANCE = "(?:instance|i)"
+      KEY_PAIR = "(?:key_pair|kp)"
+      SECURITY_GROUP = "(?:security_group|sg)"
+      VOLUME = "(?:volume|v)"
+      IMAGE = "(?:image)"
+      LOAD_BALANCER = "(?:load_balancer|lb)"
+      ADDRESS = "(?:address)"
+      SSL_CERTIFICATE = "(?:ssl_certificate|ssl)"
+      AVAILABILITY_ZONE = "(?:availability_zone|zone)"
+      DB_INSTANCE = "(?:db_instance|i)"
+
+      LIST = "(?:list|l)"
+
       on(
-        /niftycloud account list/,
+        /#{NIFTYCLOUD} #{ACCOUNT} #{LIST}/,
         name: 'account_list',
         description: 'list niftycloud accounts',
       )
 
       on(
-        /niftycloud account use (?<target>.+)/,
+        /#{NIFTYCLOUD} #{ACCOUNT} use (?<target>.+)/,
         name: 'account_use',
         description: 'use niftycloud account',
       )
 
       on(
-        /niftycloud computing instance list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{INSTANCE} #{LIST}/,
         name: 'computing_instance_list',
         description: 'list computing instances',
       )
 
       on(
-        /niftycloud computing instance show (?<instance_id>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{INSTANCE} show (?<instance_id>.+)/,
         name: 'computing_instance_show',
         description: 'show computing instance',
       )
 
       on(
-        /niftycloud computing security_group list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{SECURITY_GROUP} #{LIST}/,
         name: 'computing_security_group_list',
         description: 'list computing security groups',
       )
 
       on(
-        /niftycloud computing security_group show (?<group_name>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{SECURITY_GROUP} show (?<group_name>.+)/,
         name: 'computing_security_group_show',
         description: 'show computing security group',
       )
 
       on(
-        /niftycloud computing volume list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{VOLUME} #{LIST}/,
         name: 'computing_volume_list',
         description: 'list computing volumes',
       )
 
       on(
-        /niftycloud computing volume show (?<volume_id>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{VOLUME} show (?<volume_id>.+)/,
         name: 'computing_volume_show',
         description: 'show computing volume',
       )
 
       on(
-        /niftycloud computing load_balancer list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{LOAD_BALANCER} #{LIST}/,
         name: 'computing_load_balancer_list',
         description: 'list computing load balancers',
       )
 
       on(
-        /niftycloud computing load_balancer show (?<load_balancer_name>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{LOAD_BALANCER} show (?<load_balancer_name>.+)/,
         name: 'computing_load_balancer_show',
         description: 'show computing load balancer',
       )
 
       on(
-        /niftycloud computing address list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{ADDRESS} #{LIST}/,
         name: 'computing_address_list',
         description: 'list computing addresss',
       )
 
       on(
-        /niftycloud computing availability_zone list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{AVAILABILITY_ZONE} #{LIST}/,
         name: 'computing_availability_zone_list',
         description: 'list computing availability zones',
       )
 
       on(
-        /niftycloud computing image list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{IMAGE} #{LIST}/,
         name: 'computing_image_list',
         description: 'list computing images',
       )
 
       on(
-        /niftycloud computing image show (?<image_id>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{IMAGE} show (?<image_id>.+)/,
         name: 'computing_image_show',
         description: 'show computing image',
       )
 
       on(
-        /niftycloud computing key_pair list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{KEY_PAIR} #{LIST}/,
         name: 'computing_key_pair_list',
         description: 'list computing key pairs',
       )
 
       on(
-        /niftycloud computing key_pair show (?<key_pair_id>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{KEY_PAIR} show (?<key_pair_id>.+)/,
         name: 'computing_key_pair_show',
         description: 'show computing key pair',
       )
 
       on(
-        /niftycloud computing ssl_certificate list/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{SSL_CERTIFICATE} list/,
         name: 'computing_ssl_certificate_list',
         description: 'list computing ssl certificates',
       )
 
       on(
-        /niftycloud computing ssl_certificate show (?<fqdn_id>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} #{SSL_CERTIFICATE} show (?<fqdn_id>.+)/,
         name: 'computing_ssl_certificate_show',
         description: 'show computing ssl certificate',
       )
 
       on(
-        /niftycloud rdb db_instance list/,
+        /#{NIFTYCLOUD} #{RDB} #{DB_INSTANCE} #{LIST}/,
         name: 'rdb_db_instance_list',
         description: 'list rdb db instances',
       )
 
       on(
-        /niftycloud rdb db_instance show (?<db_instance_id>.+)/,
+        /#{NIFTYCLOUD} #{RDB} #{DB_INSTANCE} show (?<db_instance_id>.+)/,
         name: 'rdb_db_instance_show',
         description: 'show rdb db instance',
       )
 
       on(
-        /niftycloud computing region list/,
+        /#{NIFTYCLOUD} #{COMPUTING} region #{LIST}/,
         name: 'computing_region_list',
         description: 'list computing regions',
       )
 
       on(
-        /niftycloud computing region use (?<region>.+)/,
+        /#{NIFTYCLOUD} #{COMPUTING} region use (?<region>.+)/,
         name: 'computing_region_use',
         description: 'use computing region',
       )
