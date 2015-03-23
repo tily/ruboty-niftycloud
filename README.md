@@ -20,8 +20,8 @@ gem "ruboty-niftycloud"
 @ruboty niftycloud computing instance list                           - list computing instances
 @ruboty niftycloud computing instance show <instance_id>             - show computing instance
 @ruboty niftycloud computing key_pair list                           - list computing key pairs
-@ruboty niftycloud computing security group list                     - list computing security groups
-@ruboty niftycloud computing security group show <group name>        - show computing security group
+@ruboty niftycloud computing security_group list                     - list computing security groups
+@ruboty niftycloud computing security_group show <group name>        - show computing security group
 @ruboty niftycloud computing volume list                             - list computing volumes
 @ruboty niftycloud computing volume show <volume id>                 - show computing volume
 @ruboty niftycloud computing load_balancer list                      - list computing load balancers
@@ -29,8 +29,8 @@ gem "ruboty-niftycloud"
 @ruboty niftycloud computing address list                            - list computing addresses
 @ruboty niftycloud computing image list                              - list computing images
 @ruboty niftycloud computing image show <image id>                   - show computing image
-@ruboty niftycloud computing ssl certificate list                    - list computing ssl certificates
-@ruboty niftycloud computing ssl certificate show <fqdn id>          - show computing ssl certificate
+@ruboty niftycloud computing ssl_certificate list                    - list computing ssl certificates
+@ruboty niftycloud computing ssl_certificate show <fqdn id>          - show computing ssl certificate
 @ruboty niftycloud rdb db_instance list                              - list rdb db instances
 @ruboty niftycloud rdb db_instance show <db_instance_id>             - show rdb db instance
 ```
