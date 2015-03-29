@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "ace-client"
   spec.add_dependency "ace-client-ext"
   spec.add_dependency "d2e"
+  spec.add_dependency "ruport"
 end

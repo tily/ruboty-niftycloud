@@ -25,4 +25,5 @@ require "ruboty/niftycloud/version"
 require "ruboty/handlers/niftycloud"
 
 require 'd2e'
+require 'ruport'
 require "ace-client"
