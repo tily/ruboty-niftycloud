@@ -261,6 +261,7 @@ module Ruboty
 
       def event_watch(message)
         return if @thread
+        message.reply "started to watch events"
         @thread = Thread.new do
           base = Ruboty::Niftycloud::Actions::Base.new(message)
           loop do
@@ -271,20 +272,26 @@ module Ruboty
                 base.current_region(region['regionName'])
 
                 resources = {
-                  'volumes' => 'volumeId',
-                  'key_pairs' => 'keyName',
-                  'images' => 'imageId',
-                  'ssl_certificates' => 'fqdnId',
-                  'addresses' => ['publicIp', 'privateIpAddress'],
-                  'uploads' => ['conversionTaskId'],
-                  'instances' => ['instanceId'],
+                  %w(computing volumes) => {id: 'volumeId'},
+                  %w(computing key_pairs) => {id: 'keyName'},
+                  %w(computing images) => {id: 'imageId'},
+                  %w(computing ssl_certificates) => {id: 'fqdnId'},
+                  %w(computing addresses) => {id: ['publicIp', 'privateIpAddress']},
+                  %w(computing uploads) => {id: 'conversionTaskId'},
+                  %w(computing instances) => {id: 'instanceId'},
+                  %w(rdb db_instances) => {id: 'DBInstanceIdentifier'},
+                  %w(rdb db_snapshots) => {id: 'instanceId'},
+                  %w(computing security_groups) => {id: 'groupName', ignore: 'ipPermissions'},
+                  %w(rdb db_security_groups) => {id: 'DBSecurityGroupName', ignore: ['EC2SecurityGroups', 'IPRanges']},
+                  %w(rdb db_parameter_groups) => {id: 'DBParameterGroupName'},
                 }
-                resources.each do |resource, id|
+                resources.each do |options, d2e|
+                  service, resource = options
                   key = [account[:name], region['regionName'], resource].join(':')
                   prev = @prev[key]
-                  curr = base.computing.send(resource)
+                  curr = base.send(service).send(resource)
                   if prev
-                    events = D2E.new(id: id).d2e(prev, curr) 
+                    events = D2E.new(d2e).d2e(prev, curr) 
                     events.each do |event|
                       robot.say body: "#{account[:name]}(#{account[:description]}) の #{region['regionName']} で下記 #{resource} が #{event['type']} されました"
                       if event['type'] == 'create' || event['type'] == 'delete'
@@ -305,7 +312,10 @@ module Ruboty
     end
 
     def event_unwatch(message)
-      @thread.kill if @thread
+      return if @thread.nil
+      @thread.kill
+      @thread = nil
+      message.reply "stopped to watch events"
     end
   end
 end
