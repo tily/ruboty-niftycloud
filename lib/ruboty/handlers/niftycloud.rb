@@ -1,6 +1,13 @@
 module Ruboty
   module Handlers
     class Niftycloud < Base
+      attr_accessor :prev
+
+      def initialize(robot)
+        super(robot)
+        @prev = {}
+      end
+
       NIFTYCLOUD = "(?:niftycloud|nc)"
 
       ACCOUNT = "(?:account|a)"
@@ -30,6 +37,18 @@ module Ruboty
         /#{NIFTYCLOUD} #{ACCOUNT} use (?<target>.+)/,
         name: 'account_use',
         description: 'use niftycloud account',
+      )
+
+      on(
+        /#{NIFTYCLOUD} event watch/,
+        name: 'event_watch',
+        description: 'watch niftycloud events',
+      )
+
+      on(
+        /#{NIFTYCLOUD} event unwatch/,
+        name: 'event_unwatch',
+        description: 'unwatch niftycloud events',
       )
 
       on(
@@ -239,6 +258,54 @@ module Ruboty
       def computing_region_use(message)
         Ruboty::Niftycloud::Actions::ComputingRegionUse.new(message).call
       end
+
+      def event_watch(message)
+        return if @thread
+        @thread = Thread.new do
+          base = Ruboty::Niftycloud::Actions::Base.new(message)
+          loop do
+            base.accounts.each do |account|
+              base.current_account(account[:name])
+
+              base.computing.regions.each do |region|
+                base.current_region(region['regionName'])
+
+                resources = {
+                  'volumes' => 'volumeId',
+                  'key_pairs' => 'keyName',
+                  'images' => 'imageId',
+                  'ssl_certificates' => 'fqdnId',
+                  'addresses' => ['publicIp', 'privateIpAddress'],
+                  'uploads' => ['conversionTaskId'],
+                  'instances' => ['instanceId'],
+                }
+                resources.each do |resource, id|
+                  key = [account[:name], region['regionName'], resource].join(':')
+                  prev = @prev[key]
+                  curr = base.computing.send(resource)
+                  if prev
+                    events = D2E.new(id: id).d2e(prev, curr) 
+                    events.each do |event|
+                      robot.say body: "#{account[:name]}(#{account[:description]}) の #{region['regionName']} で下記 #{resource} が #{event['type']} されました"
+                      if event['type'] == 'create' || event['type'] == 'delete'
+                        robot.say body: event['item']
+                      else
+                        robot.say body: event
+                      end
+                    end
+                  end
+                  @prev[key] = curr
+                end
+              end
+            end
+            sleep 5
+          end
+        end.run
+      end
+    end
+
+    def event_unwatch(message)
+      @thread.kill if @thread
     end
   end
 end
