@@ -24,4 +24,5 @@ require "ruboty/niftycloud/actions/rdb_db_instance_show"
 require "ruboty/niftycloud/version"
 require "ruboty/handlers/niftycloud"
 
+require 'd2e'
 require "ace-client"
