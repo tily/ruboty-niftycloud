@@ -1,3 +1,4 @@
+# coding:utf-8
 module Ruboty
   module Handlers
     class Niftycloud < Base
@@ -272,36 +273,50 @@ module Ruboty
                 base.current_region(region['regionName'])
 
                 resources = {
-                  %w(computing volumes) => {id: 'volumeId'},
-                  %w(computing key_pairs) => {id: 'keyName'},
-                  %w(computing images) => {id: 'imageId'},
-                  %w(computing ssl_certificates) => {id: 'fqdnId'},
-                  %w(computing addresses) => {id: ['publicIp', 'privateIpAddress']},
-                  %w(computing uploads) => {id: 'conversionTaskId'},
-                  %w(computing instances) => {id: 'instanceId'},
-                  %w(rdb db_instances) => {id: 'DBInstanceIdentifier'},
-                  %w(rdb db_snapshots) => {id: 'instanceId'},
-                  %w(computing security_groups) => {id: 'groupName', ignore: 'ipPermissions'},
-                  %w(rdb db_security_groups) => {id: 'DBSecurityGroupName', ignore: ['EC2SecurityGroups', 'IPRanges']},
-                  %w(rdb db_parameter_groups) => {id: 'DBParameterGroupName'},
+                  %w(computing volumes) => {id: 'volumeId', label: 'ディスク'},
+                  %w(computing key_pairs) => {id: 'keyName', label: 'SSH キー'},
+                  %w(computing images) => {id: 'imageId', label: 'イメージ'},
+                  %w(computing ssl_certificates) => {id: 'fqdnId', label: 'SSL 証明書'},
+                  %w(computing addresses) => {id: ['publicIp', 'privateIpAddress'], label: '付替 IP アドレス'},
+                  %w(computing uploads) => {id: 'conversionTaskId', label: 'アップロード'},
+                  %w(computing instances) => {id: 'instanceId', label: 'サーバー'},
+                  %w(rdb db_instances) => {id: 'DBInstanceIdentifier', label: 'DB サーバー'},
+                  %w(rdb db_snapshots) => {id: 'instanceId', label: 'DB スナップショット'},
+                  %w(computing security_groups) => {id: 'groupName', ignore: 'ipPermissions', label: 'ファイアウォールグループ'},
+                  %w(rdb db_security_groups) => {id: 'DBSecurityGroupName', ignore: ['EC2SecurityGroups', 'IPRanges'], label: 'DB ファイアウォールグループ'},
+                  %w(rdb db_parameter_groups) => {id: 'DBParameterGroupName', label: 'DB パラメーターグループ'},
                 }
                 resources.each do |options, d2e|
-                  service, resource = options
-                  key = [account[:name], region['regionName'], resource].join(':')
-                  prev = @prev[key]
-                  curr = base.send(service).send(resource)
-                  if prev
-                    events = D2E.new(d2e).d2e(prev, curr) 
-                    events.each do |event|
-                      robot.say body: "#{account[:name]}(#{account[:description]}) の #{region['regionName']} で下記 #{resource} が #{event['type']} されました"
-                      if event['type'] == 'create' || event['type'] == 'delete'
-                        robot.say body: event['item']
-                      else
-                        robot.say body: event
+                  begin
+                    service, resource = options
+                    key = [account[:name], region['regionName'], resource].join(':')
+                    prev = @prev[key]
+                    curr = base.send(service).send(resource)
+                    if prev
+                      events = D2E.new(d2e).d2e(prev, curr) 
+                      events.each do |event|
+                        ja = case event['type']
+                        when 'create'; '作成'
+                        when 'delete'; '削除'
+                        when 'update'; '更新'
+                        end
+                        if event['type'] == 'create' || event['type'] == 'delete'
+                          robot.say body: "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}が#{ja}されました"
+                          table = Table(event['item'].keys)
+                          table << event['item'].values
+                          robot.say body: table.to_s
+                        else
+                          robot.say body: "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}(#{event['id']})が#{ja}されました"
+                          table = Table(event['diff'].keys)
+                          table << event['diff'].values.map {|val| "#{val[0]} -> #{val[1]}" }
+                          robot.say body: table.to_s
+                        end
                       end
                     end
+                    @prev[key] = curr
+                  rescue StandardError => e
+                    robot.say "Error: #{e}"
                   end
-                  @prev[key] = curr
                 end
               end
             end
