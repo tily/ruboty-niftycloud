@@ -14,6 +14,8 @@ gem "ruboty-niftycloud"
 ```
 @ruboty niftycloud account list                                      - list accounts
 @ruboty niftycloud account use <account or number>                   - use account
+@ruboty niftycloud event watch                                       - watch events
+@ruboty niftycloud event unwatch                                     - unwatch events
 @ruboty niftycloud computing region list                             - list computing regions
 @ruboty niftycloud computing region use                              - use computing region
 @ruboty niftycloud computing availability zone list                  - list computing availability zones
