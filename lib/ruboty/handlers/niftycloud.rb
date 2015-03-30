@@ -301,15 +301,19 @@ module Ruboty
                         when 'update'; '更新'
                         end
                         if event['type'] == 'create' || event['type'] == 'delete'
-                          message.reply "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}が#{ja}されました"
                           table = Table(event['item'].keys)
                           table << event['item'].values
-                          message.reply table.to_s
+                          message.reply [
+                            "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}が#{ja}されました",
+                            table.to_s
+                          ]
                         else
-                          message.reply "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}(#{event['id']})が#{ja}されました"
                           table = Table(event['diff'].keys)
                           table << event['diff'].values.map {|val| "#{val[0]} -> #{val[1]}" }
-                          message.reply table.to_s
+                          message.reply [
+                            "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}(#{event['id']})が#{ja}されました",
+                            table.to_s
+                          ].join("\n")
                         end
                       end
                     end
