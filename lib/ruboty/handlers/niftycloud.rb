@@ -301,21 +301,21 @@ module Ruboty
                         when 'update'; '更新'
                         end
                         if event['type'] == 'create' || event['type'] == 'delete'
-                          robot.say body: "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}が#{ja}されました"
+                          message.reply "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}が#{ja}されました"
                           table = Table(event['item'].keys)
                           table << event['item'].values
-                          robot.say body: table.to_s
+                          message.reply table.to_s
                         else
-                          robot.say body: "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}(#{event['id']})が#{ja}されました"
+                          message.reply "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}(#{event['id']})が#{ja}されました"
                           table = Table(event['diff'].keys)
                           table << event['diff'].values.map {|val| "#{val[0]} -> #{val[1]}" }
-                          robot.say body: table.to_s
+                          message.reply table.to_s
                         end
                       end
                     end
                     @prev[key] = curr
                   rescue StandardError => e
-                    robot.say "Error: #{e}"
+                    message.reply "Error: #{e}"
                   end
                 end
               end
