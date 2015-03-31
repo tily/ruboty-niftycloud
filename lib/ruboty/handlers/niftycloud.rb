@@ -306,7 +306,7 @@ module Ruboty
                           message.reply [
                             "#{account[:name]} (#{account[:description]}) の #{region['regionName']} で下記#{d2e[:label]}が#{ja}されました",
                             table.to_s
-                          ]
+                          ].join("\n")
                         else
                           table = Table(event['diff'].keys)
                           table << event['diff'].values.map {|val| "#{val[0]} -> #{val[1]}" }
